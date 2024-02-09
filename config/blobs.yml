@@ -24,20 +24,16 @@ etcd/etcd-v3.4.10-linux-amd64.tar.gz:
   sha: sha256:a4d729f9f89d33f65380e1f1c5fa3ce625971d5dab169f9e57f91e8649f122f2
 ipvsadm/ipvsadm-1.30.tar.gz:
   size: 48183
-  object_id: 19736942-a2cc-4464-6364-07dce0f01cd4
-  sha: e739a8a10f8fe855bb589c194d2776be35d3fba2
+  sha: sha256:888a281cb468118fefb939ab764b85aad504dc4a5ccb6b81d8d91c3214a53d5c
 ipvsadm/libnl-3.2.25.tar.gz:
   size: 832513
-  object_id: 1f18b038-be2a-403d-7a21-674e93b6e98f
-  sha: b7a4981f7edf7398256d35fd3c0b87bc84ae27d1
+  sha: sha256:8beb7590674957b931de6b7f81c530b85dc7c1ad8fbda015398bc1e8d1ce8ec5
 ipvsadm/popt-1.16.tar.gz:
   size: 702769
-  object_id: 17412e51-fc04-42c8-487f-d5d0ef7ed922
-  sha: cfe94a15a2404db85858a81ff8de27c8ff3e235e
+  sha: sha256:e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8
 jq/jq:
   size: 3953824
-  object_id: 7a4439f1-9ec7-4d42-56fe-c0b6bb0e9b64
-  sha: 056ba5d6bbc617c29d37158ce11fd5a443093949
+  sha: sha256:af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
 k8s/kube-apiserver:
   size: 115245056
   object_id: 9fe964f8-83e3-43bc-440a-7fa0e699f331
@@ -64,12 +60,10 @@ k8s/kubelet:
   sha: sha256:3f03e5c160a8b658d30b34824a1c00abadbac96e62c4d01bf5c9271a2debc3ab
 lb/haproxy-1.8.22.tar.gz:
   size: 2100471
-  object_id: 07252afc-ee4c-4e4c-46ab-ac189707b6fb
-  sha: 628227995cae7119438b405179ba95520ce5256a
+  sha: sha256:7be245cdbc3fff9365af1df1c13fdff768fb7f9c4363e7daa52c315ec20dc1f8
 lb/keepalived-2.0.16.tar.gz:
   size: 983376
-  object_id: 11420b07-06b6-4a0a-6c1e-820dd546cf8c
-  sha: ff85a4fd121564c616de9f41c79b02eaab9aff59
+  sha: sha256:f0c7dc86147a286913c1c2c918f557735016285d25779d4d2fce5732fcb888df
 nfs-c7-rpms/gssproxy-0.7.0-26.el7.x86_64.rpm:
   size: 112488
   object_id: 0d84a3ba-c65d-46dd-65df-7667855286de
@@ -180,5 +174,4 @@ runtime-runc/runsc:
   sha: sha256:94384418393531901395fc3744df257d6936f971a0e52a44934efbbf5b3b72d1
 socat/socat-1.7.3.3.tar.bz2:
   size: 489901
-  object_id: 0123eb8d-0367-4f2b-5981-bd3e1f5826ce
-  sha: 504afb0f2ae5d3582448cfc6e2b676370b0b9f81
+  sha: sha256:0dd63ffe498168a4aac41d307594c5076ff307aa0ac04b141f8f1cec6594d04a
