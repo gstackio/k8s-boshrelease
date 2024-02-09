@@ -8,7 +8,7 @@ meta:
 
   test-errands: ~
 
-  initial_version: 1.0.0
+  initial_version: "1.19.0"
 
   manifest:
     directory: manifests
@@ -66,6 +66,106 @@ meta:
 
 # would need to find back the bump jobs
 
+groups:
+  - name: (( grab meta.pipeline ))
+    jobs:
+      - (( append ))
+      - build-images
+  - name: bump
+    jobs:
+      - bump-deps
+
+jobs:
+  - name: bump-deps
+    public: true
+    serial: true
+    plan:
+      - in_parallel:
+          - { get: weekly, trigger: true }
+          - { get: jammy-latest, params: { format: oci } }
+          - { get: alpine-latest,       params: { format: oci } }
+
+    on_failure:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.fail_text ))
+
+  - name: build-images
+    public: true
+    serial: true
+    plan:
+      - in_parallel:
+          - { get: git, trigger: true }
+          - { get: version, params: { bump: final } }
+          - { get: docker-image-build-task }
+          - { get: jammy-latest,  passed: [ bump-deps ], trigger: true, params: { format: oci } }
+          - { get: alpine-latest, passed: [ bump-deps ], trigger: true, params: { format: oci } }
+
+      - load_var: version
+        file: version/number
+
+      - in_parallel:
+          - do:
+              - task: build-kube-proxy-image
+                <<: &build_image
+                  image: docker-image-build-task
+                  privileged: true
+                  config:
+                    platform: linux
+                    inputs:
+                      - { name: git, path: "." }
+                      - { name: jammy-latest }
+                      - { name: alpine-latest }
+                    outputs: [ name: image ]
+                    caches:  [ path: cache ]
+                    run:     { path: build }
+                params:
+                  <<: &image_arg
+                    IMAGE_ARG_ubuntu: jammy-latest/image.tar
+                    IMAGE_ARG_alpine: alpine-latest/image.tar
+                  CONTEXT:            images/kube-proxy
+                output_mapping:
+                  image: built-kube-proxy-image
+
+              - put: kube-proxy-image
+                inputs: [ built-kube-proxy-image ]
+                params:
+                  image:   built-kube-proxy-image/image.tar
+                  version: ((.:version))
+
+          - do:
+              - task: build-smoke-test-image
+                <<: *build_image
+                params:
+                  <<: *image_arg
+                  CONTEXT: images/smoke-test
+                output_mapping:
+                  image: built-smoke-test-image
+
+              - put: smoke-test-image
+                inputs: [ built-smoke-test-image ]
+                params:
+                  image:   built-smoke-test-image/image.tar
+                  version: ((.:version))
+
+    on_failure:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.fail_text ))
+
+  - name: testflight
+    plan:
+      - (( inline ))
+      - in_parallel:
+          - (( merge on get ))
+          - { get: git, passed: [ build-images ] }
+
 resources:
 
   - name: git
@@ -90,3 +190,50 @@ resources:
       file:        (( concat "versions/" meta.pipeline ))
       private_key: ((github-private-key))
       git_user:    "((git-commit-name)) <((git-commit-email))>"
+
+  - name: weekly
+    type: time
+    icon: alarm
+    source:
+      location: Europe/Paris
+      start:    "3:00"
+      stop:     "4:30"
+      days:     [ Saturday ]
+
+  - name: docker-image-build-task
+    type: registry-image
+    icon: docker
+    source:
+      repository: concourse/oci-build-task
+
+  - name: jammy-latest
+    type: registry-image
+    icon: docker
+    check_every: 24h
+    source:
+      repository: ubuntu
+      tag:        jammy
+
+  - name: alpine-latest
+    type: registry-image
+    icon: docker
+    check_every: 24h
+    source:
+      repository:        alpine
+      semver_constraint: "< 1970" # Avoid YYYYMMDD tags like '20231219'
+
+  - name: kube-proxy-image
+    type: registry-image
+    icon: docker
+    source:
+      username:   (( grab meta.private-registry.username ))
+      password:   (( grab meta.private-registry.password ))
+      repository: (( concat meta.private-registry.host "/huntprod/k8s-bosh-kube-proxy" ))
+
+  - name: smoke-test-image
+    type: registry-image
+    icon: docker
+    source:
+      username:   (( grab meta.private-registry.username ))
+      password:   (( grab meta.private-registry.password ))
+      repository: (( concat meta.private-registry.host "/huntprod/k8s-bosh-smoke-test" ))
