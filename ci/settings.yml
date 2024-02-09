@@ -1,8 +1,10 @@
 ---
 meta:
   name:    k8s
-  target:  gk
+  release: Kubernetes Bosh Release
+  target:  gk-plat-devs
   url:     https://ci.gstack.io
+  team:    gk-plat-devs
 
   test-errands: ~
 
@@ -10,37 +12,73 @@ meta:
 
   manifest:
     directory: manifests
+    path:      (( concat meta.manifest.directory "/" meta.bosh.deployment ".yml" ))
 
   git:
     email:  ((git-commit-email))
     name:   ((git-commit-name))
 
   image:
+    name: (( concat meta.private-registry.host "/gstack/gk-ops" ))
     registry:
-      username: ((docker_registry_username))
-      password: ((docker-registry-password))
+      username: (( grab meta.private-registry.username ))
+      password: (( grab meta.private-registry.password ))
+
+  private-registry:
+    host:       harbor.ci.gstack.io
+    username:   ((private-registry-username))
+    password:   ((private-registry-password))
 
   aws:
     bucket:      (( grab meta.pipeline ))
-    region_name: us-east-1
+    region_name: eu-west-3
     access_key:  ((aws-access-key))
     secret_key:  ((aws-secret-key))
 
   github:
-    owner:        cloudfoundry-community
+    owner:        gstackio
     repo:         (( grab meta.pipeline ))
     branch:       master
     private_key:  ((github-private-key))
     access_token: ((github-access-token))
 
   bosh:
+    deployment: tinynetes
     stemcell:
       cpi: warden-boshlite
+      os: ubuntu-jammy
 
   slack:
     webhook:       ((slack-webhook))
     username:      ((slack-username))
     icon:          ((slack-icon-url))
-    channel:       (( concat "#" meta.name "-boshrelease" ))
-    blob_success:  '(( concat ": New version of  was detected, and updated in master. <" meta.url "/teams//pipelines/| Cut a new release?>" ))'
-    blob_failure:  '(( concat ": :airplane_arriving: <" meta.url "/teams//pipelines//jobs//builds/| Failed to update the blob for >" ))'
+    channel:       "#oss-pipelines-notifications"
+    # blob_success:  '(( concat ": New version of  was detected, and updated in master. <" meta.url "/teams//pipelines/| Cut a new release?>" ))'
+    # blob_failure:  '(( concat ": :airplane_arriving: <" meta.url "/teams//pipelines//jobs//builds/| Failed to update the blob for >" ))'
+
+# would need to find back the bump jobs
+
+resources:
+
+  - name: git
+    check_every: 24h
+    webhook_token: ((concourse-webhook-token))
+
+  - name: git-pull-requests
+    check_every: 24h
+    webhook_token: ((concourse-webhook-token))
+
+  - name: version
+    icon: github
+    source:
+      bucket:            (( prune ))
+      region_name:       (( prune ))
+      key:               (( prune ))
+      access_key_id:     (( prune ))
+      secret_access_key: (( prune ))
+      driver:      git
+      uri:         git@github.com:gstackio/gk-pipelines-compass.git
+      branch:      master
+      file:        (( concat "versions/" meta.pipeline ))
+      private_key: ((github-private-key))
+      git_user:    "((git-commit-name)) <((git-commit-email))>"
