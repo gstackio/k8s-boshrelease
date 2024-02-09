@@ -176,6 +176,9 @@ jobs:
           platform: linux
           inputs:  [ name: git ]
           outputs: [ name: repo-with-blobs ]
+          caches:
+            - path: repo-with-blobs/blobs
+            - path: repo-with-blobs/tmp
           run:
             path: bash
             args:
