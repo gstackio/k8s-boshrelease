@@ -165,6 +165,28 @@ jobs:
       - in_parallel:
           - (( merge on get ))
           - { get: git, passed: [ build-images ] }
+      - task: testflight
+        input_mapping:
+          git: repo-with-blobs
+
+      - (( insert before 1 ))
+      - task: prepare
+        image: image
+        config:
+          platform: linux
+          inputs:  [ name: git ]
+          outputs: [ name: repo-with-blobs ]
+          run:
+            path: bash
+            args:
+              - -c
+              - |
+                set -ex
+                find "git" -mindepth 1 -maxdepth 1 -print0 \
+                    | xargs -0 -I{} cp -a {} "repo-with-blobs"
+                cd "repo-with-blobs" || exit 115
+                utils/add-blobs.sh
+                bash -x utils/update-from-upstream
 
 resources:
 
