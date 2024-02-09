@@ -1,26 +1,20 @@
 cfssl/cfssl_linux-amd64:
   size: 10376657
-  object_id: 7c4f8fab-655c-40e1-7fe6-428e000a94b9
   sha: sha256:eb34ab2179e0b67c29fd55f52422a94fe751527b06a403a79325fed7cf0145bd
 cfssl/cfssljson_linux-amd64:
   size: 2277873
-  object_id: b969f700-03c6-4b5c-6290-b8d8089efc97
   sha: sha256:1c9e628c3b86c3f2f8af56415d474c9ed4c8f9246630bd21c3418dbe5bf6401e
 containerd/cni-plugins-linux-amd64-v0.8.6.tgz:
   size: 36878412
-  object_id: 72c9f3cd-aec2-4dda-574a-b24a3a8ac0d1
   sha: sha256:994fbfcdbb2eedcfa87e48d8edb9bb365f4e2747a7e47658482556c12fd9b2f5
 containerd/containerd-1.3.7-linux-amd64.tar.gz:
   size: 39966002
-  object_id: 9ed8cac0-9cb0-42ce-6c8b-270c68f86d4a
   sha: sha256:5bfa0524492ec7f3ba96ea91d3b36dfa6b1fa9e38b9d61658df93cd9458b3144
 containerd/crictl-v1.18.0-linux-amd64.tar.gz:
   size: 12590605
-  object_id: fd2f3b64-df6f-4d7a-4799-18e905d627ba
   sha: sha256:876dd2b3d0d1c2590371f940fb1bf1fbd5f15aebfbe456703ee465d959700f4a
 etcd/etcd-v3.4.10-linux-amd64.tar.gz:
   size: 17370166
-  object_id: ac1362c6-bc28-4bc1-4310-7b1f7f876f0c
   sha: sha256:a4d729f9f89d33f65380e1f1c5fa3ce625971d5dab169f9e57f91e8649f122f2
 ipvsadm/ipvsadm-1.30.tar.gz:
   size: 48183
@@ -36,27 +30,21 @@ jq/jq:
   sha: sha256:af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
 k8s/kube-apiserver:
   size: 115245056
-  object_id: 9fe964f8-83e3-43bc-440a-7fa0e699f331
   sha: sha256:6f13a2b9e3f10ec1a5c4a7280af67fdb799a8244e88c60a1421c5a961785893b
 k8s/kube-controller-manager:
   size: 107249664
-  object_id: 4bb83c4a-9b3f-4b92-57ab-1733e8df226f
   sha: sha256:8f2f75f800c639ab8d5f98a331e38b07c8f4f7ea2ead963c0994af35f79ca5a9
 k8s/kube-proxy:
   size: 38805504
-  object_id: 32c1242a-e52c-483d-6908-cfdac2f1b13f
   sha: sha256:9710e8ef84543d2db6551417543f95195913dcde5238caf681689866ad7320a2
 k8s/kube-scheduler:
   size: 42123264
-  object_id: dc24333c-3f41-40f9-7ed6-1f1fb28b458c
   sha: sha256:cb1dc5089975915a56bd4a66dfba429e5dbd61e3e8683979a49e69d8ed78652b
 k8s/kubectl:
   size: 43003904
-  object_id: 574f4b4a-b951-483d-499f-807711b7343d
   sha: sha256:79bb0d2f05487ff533999a639c075043c70a0a1ba25c1629eb1eef6ebe3ba70f
 k8s/kubelet:
   size: 109974472
-  object_id: 92528b7a-1b36-43ee-4979-e679864a4ee1
   sha: sha256:3f03e5c160a8b658d30b34824a1c00abadbac96e62c4d01bf5c9271a2debc3ab
 lb/haproxy-1.8.22.tar.gz:
   size: 2100471
@@ -64,113 +52,9 @@ lb/haproxy-1.8.22.tar.gz:
 lb/keepalived-2.0.16.tar.gz:
   size: 983376
   sha: sha256:f0c7dc86147a286913c1c2c918f557735016285d25779d4d2fce5732fcb888df
-# nfs-c7-rpms/gssproxy-0.7.0-26.el7.x86_64.rpm:
-#   size: 112488
-#   object_id: 0d84a3ba-c65d-46dd-65df-7667855286de
-#   sha: sha256:f76e9698b24159ac3969c7d1f60a76d55acb8438d3cec633784dd4c6345696a0
-# nfs-c7-rpms/keyutils-1.5.8-3.el7.x86_64.rpm:
-#   size: 54856
-#   object_id: db95d016-ad16-4aad-5c74-d025908cb3da
-#   sha: sha256:ea4b62eb78f2b76321b1f4bd66a699a4e25fa7fa6b421008fbecc549f18857e4
-# nfs-c7-rpms/libbasicobjects-0.1.1-32.el7.x86_64.rpm:
-#   size: 26268
-#   object_id: 0a9c91c6-55e3-4696-72bf-cf62e3aa808b
-#   sha: sha256:e31425945dc2b82c6a8e81053da5811bb09a18d1927609b0ce1a9f1ee017c3a0
-# nfs-c7-rpms/libcollection-0.7.0-32.el7.x86_64.rpm:
-#   size: 42604
-#   object_id: 700fbcd5-9f88-4b47-5dc8-4b5863ab9436
-#   sha: sha256:b41779c27434eb4e60f7d7512e6de3c3a1113142fac946b76b263afdb4e19f12
-# nfs-c7-rpms/libevent-2.0.21-4.el7.x86_64.rpm:
-#   size: 219068
-#   object_id: 5049b240-f962-46d1-74c2-c79598214809
-#   sha: sha256:ea69be98106a9d142ba5027de326e85086bd31c22e764fbc7287207dd60bb542
-# nfs-c7-rpms/libini_config-1.3.1-32.el7.x86_64.rpm:
-#   size: 65172
-#   object_id: 744e341d-5a50-4ea4-587b-13576f147870
-#   sha: sha256:1a9c9e36bf4d39e9b2113040c68c9a8afd687e41eb4b0162f6dc01ea3a249190
-# nfs-c7-rpms/libnfsidmap-0.25-19.el7.x86_64.rpm:
-#   size: 51000
-#   object_id: eccf3bfe-fd64-41d3-619a-e4a5d3a40e74
-#   sha: sha256:c46b277ede93c8a726c8369aed90722bcbaeaabff72d42701a3ef2941e835c7d
-# nfs-c7-rpms/libpath_utils-0.2.1-32.el7.x86_64.rpm:
-#   size: 28960
-#   object_id: 4203bb76-0371-4331-52f5-8a9174ac1b68
-#   sha: sha256:2dc53732b8228e11664ee52d7e7ed81f77846662d810f044cfe3ee8e672c306f
-# nfs-c7-rpms/libref_array-0.1.5-32.el7.x86_64.rpm:
-#   size: 27700
-#   object_id: 3c12d508-4f4d-4f80-67f6-170c33579d02
-#   sha: sha256:30ef379dc9e1e3de38d37800f40abfb04722d3e2b764f7822c4b879da10933cd
-# nfs-c7-rpms/libverto-libevent-0.2.5-4.el7.x86_64.rpm:
-#   size: 9108
-#   object_id: c4d0af9c-a4fc-4ae7-7cab-dbbbbca44437
-#   sha: sha256:a85824d374912a3f06e5e8e592d66d604b9387f1ae5fd281af8cc297ebf47d0a
-# nfs-c7-rpms/nfs-utils-1.3.0-0.65.el7.x86_64.rpm:
-#   size: 421648
-#   object_id: db2027a2-5ae0-42ce-6cd3-ca2a6a5acc31
-#   sha: sha256:3702c649b9da4231732bbcd9996be8b13846870b5ccc9a25c2fa473568acd89c
-# nfs-c7-rpms/quota-4.01-19.el7.x86_64.rpm:
-#   size: 182932
-#   object_id: 9aa4f1aa-541b-4f04-714b-a6483989990c
-#   sha: sha256:292a888e6ae42efd943340f7712df3ac5288c9627adb246d2a6a6fe79379c943
-# nfs-c7-rpms/rpcbind-0.2.0-48.el7.x86_64.rpm:
-#   size: 61400
-#   object_id: bcf35362-8131-45d0-71ff-1020833d8d3e
-#   sha: sha256:30491f6d238cf8ac2e468df1a982740dc5e0b63438aba5841a562cce7587a6e6
-# nfs-trusty-debs/libevent-2.0-5_2.0.21-stable-1ubuntu1.14.04.2_amd64.deb:
-#   size: 126342
-#   object_id: 690fc181-a47d-44cd-4382-0f75814d968c
-#   sha: c91f6872e804274d2b615f4f3ead979f176adba3
-# nfs-trusty-debs/libkeyutils1_1.5.6-1_amd64.deb:
-#   size: 7318
-#   object_id: c389a7b3-3c51-4951-67c3-b939a53fcf33
-#   sha: 9f38a6d5d43c2d70a031034668f4989cc9c5eb56
-# nfs-trusty-debs/libnfsidmap2_0.25-5_amd64.deb:
-#   size: 32182
-#   object_id: dd7a1589-2968-4ffe-7743-2cc730c77c16
-#   sha: f28b7370542daaf81cefb44d9057fa9b3fb43064
-# nfs-trusty-debs/nfs-common_1.2.8-6ubuntu1.2_amd64.deb:
-#   size: 180760
-#   object_id: ee7c6bd8-d07b-48db-405c-b41cbe73f63b
-#   sha: ce61f57dd64fa9fd908798677d23a91a375bc60c
-# nfs-trusty-debs/nfs-kernel-server_1.2.8-6ubuntu1.2_amd64.deb:
-#   size: 85826
-#   object_id: 7d19fa6e-ae6e-46bc-56cd-b7996623da87
-#   sha: 1ef96876212fb4ce6e3ebb3e18d9ec2d2d9ceb48
-# nfs-trusty-debs/rpcbind_0.2.1-2ubuntu2.2_amd64.deb:
-#   size: 37056
-#   object_id: 76d8b0a3-8454-4ab9-4465-0dad6b871d55
-#   sha: 80b3254778e8d0ab0ba0a594fcdab44730552bdb
-# nfs-xenial-debs/keyutils_1.5.9-8ubuntu1_amd64.deb:
-#   size: 47054
-#   object_id: 1b3d7cdc-c46b-40e8-65f5-f2d411eb283e
-#   sha: ec2e96e73feb5215605c9f0254cad05d9cc5688a
-# nfs-xenial-debs/libevent-2.0-5_2.0.21-stable-2ubuntu0.16.04.1_amd64.deb:
-#   size: 114014
-#   object_id: eaa1f693-3633-4e7d-4cd0-8661515430a0
-#   sha: 57d69f44f3e058e48a7b79595d36076eb21f5942
-# nfs-xenial-debs/libnfsidmap2_0.25-5_amd64.deb:
-#   size: 32182
-#   object_id: 269a9f44-9683-49d3-6b44-e61ff94568aa
-#   sha: f28b7370542daaf81cefb44d9057fa9b3fb43064
-# nfs-xenial-debs/nfs-common_1.2.8-9ubuntu12_amd64.deb:
-#   size: 184538
-#   object_id: be3b81f0-621b-4bdf-7892-b568cb0f135a
-#   sha: 2977e5a1e86615e268cc518f04c9dd2cc832b263
-# nfs-xenial-debs/nfs-kernel-server_1.2.8-9ubuntu12_amd64.deb:
-#   size: 87962
-#   object_id: 0fa52d66-22b0-4532-4266-e71d1eb2cccf
-#   sha: d5c57c7b7e8ab0fa5ab7c343aa2a039916a9814d
-# nfs-xenial-debs/rpcbind_0.2.3-0.2_amd64.deb:
-#   size: 40252
-#   object_id: 1922b993-b271-41e7-5ef6-ee21474ad105
-#   sha: 8fa58cfcb1862c6d337d10496fada5f1a6e94a03
 runtime-runc/runc:
   size: 10843120
   sha: sha256:85ace5fdae9ddbe5904dcbfecbdc3175f74feb6b74e69d19be5d8827063be1fe
-# runtime-runc/runsc:
-#   size: 17472381
-#   object_id: 5c605fdb-10fa-4f62-6f19-c2786837b18a
-#   sha: sha256:94384418393531901395fc3744df257d6936f971a0e52a44934efbbf5b3b72d1
 socat/socat-1.7.3.3.tar.bz2:
   size: 489901
   sha: sha256:0dd63ffe498168a4aac41d307594c5076ff307aa0ac04b141f8f1cec6594d04a
