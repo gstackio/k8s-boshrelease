@@ -75,7 +75,7 @@ if [[ "${PROXY_IP:-X}" != "X" ]] ; then export BOSH_ALL_PROXY=socks5://localhost
 delete_deployment
 
 header "Creating candidate BOSH release..."
-# bosh -n reset-release # in case dev_releases/ is in repo accidentally
+bosh -n reset-release # in case dev_releases/ is in repo accidentally
 
 blobstore_provider=$(bosh int config/final.yml --path /blobstore/provider)
 if [[ ${blobstore_provider} == "s3" && -n ${AWS_ACCESS_KEY} ]]; then
@@ -89,7 +89,7 @@ YAML
 fi
 
 bosh create-release
-# bosh upload-release --rebase
+bosh upload-release --rebase
 
 header "Deploying to ${BOSH_ENVIRONMENT}..."
 release_name=$(bosh int config/final.yml --path /final_name 2> /dev/null) \

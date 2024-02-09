@@ -38,7 +38,7 @@ meta:
     password:   ((private-registry-password))
 
   aws:
-    bucket:      (( grab meta.pipeline ))
+    bucket:      (( concat "gk-" meta.pipeline ))
     region_name: eu-west-3
     access_key:  ((aws-access-key))
     secret_key:  ((aws-secret-key))
@@ -158,38 +158,6 @@ jobs:
         username: (( grab meta.slack.username ))
         icon_url: (( grab meta.slack.icon ))
         text:     (( grab meta.slack.fail_text ))
-
-  - name: testflight
-    plan:
-      - (( inline ))
-      - in_parallel:
-          - (( merge on get ))
-          - { get: git, passed: [ build-images ] }
-      - task: testflight
-        input_mapping:
-          git: repo-with-blobs
-
-      - (( insert before 1 ))
-      - task: prepare
-        image: image
-        config:
-          platform: linux
-          inputs:  [ name: git ]
-          outputs: [ name: repo-with-blobs ]
-          caches:
-            - path: repo-with-blobs/blobs
-            - path: repo-with-blobs/tmp
-          run:
-            path: bash
-            args:
-              - -c
-              - |
-                set -ex
-                find "git" -mindepth 1 -maxdepth 1 -print0 \
-                    | xargs -0 -I{} cp -a {} "repo-with-blobs"
-                cd "repo-with-blobs" || exit 115
-                utils/add-blobs.sh
-                bash -x utils/update-from-upstream
 
 resources:
 
