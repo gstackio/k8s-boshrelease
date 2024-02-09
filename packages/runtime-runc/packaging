@@ -3,5 +3,5 @@ set -eu
 
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
 cp runtime-runc/runc  ${BOSH_INSTALL_TARGET}/bin
-cp runtime-runc/runsc ${BOSH_INSTALL_TARGET}/bin
+# cp runtime-runc/runsc ${BOSH_INSTALL_TARGET}/bin
 chmod 755 ${BOSH_INSTALL_TARGET}/bin/*

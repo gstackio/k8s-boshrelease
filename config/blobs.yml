@@ -165,13 +165,12 @@ lb/keepalived-2.0.16.tar.gz:
 #   object_id: 1922b993-b271-41e7-5ef6-ee21474ad105
 #   sha: 8fa58cfcb1862c6d337d10496fada5f1a6e94a03
 runtime-runc/runc:
-  size: 10661624
-  object_id: 7d1f061d-7ede-4fe7-7d78-1e8e16287993
-  sha: sha256:0fec6929f8675aa7530a7920498e8910365cc9f2867e9a31d2129defd96aa489
-runtime-runc/runsc:
-  size: 17472381
-  object_id: 5c605fdb-10fa-4f62-6f19-c2786837b18a
-  sha: sha256:94384418393531901395fc3744df257d6936f971a0e52a44934efbbf5b3b72d1
+  size: 10843120
+  sha: sha256:85ace5fdae9ddbe5904dcbfecbdc3175f74feb6b74e69d19be5d8827063be1fe
+# runtime-runc/runsc:
+#   size: 17472381
+#   object_id: 5c605fdb-10fa-4f62-6f19-c2786837b18a
+#   sha: sha256:94384418393531901395fc3744df257d6936f971a0e52a44934efbbf5b3b72d1
 socat/socat-1.7.3.3.tar.bz2:
   size: 489901
   sha: sha256:0dd63ffe498168a4aac41d307594c5076ff307aa0ac04b141f8f1cec6594d04a
