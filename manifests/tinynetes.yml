@@ -1,4 +1,4 @@
-name: ((deployment_name))
+name: tinynetes
 
 instance_groups:
   - name:      k8s
@@ -15,7 +15,7 @@ instance_groups:
     stemcell:  default
 
     networks:
-      - name: ((network_name))
+      - name: default
 
     jobs:
       - name: etcd

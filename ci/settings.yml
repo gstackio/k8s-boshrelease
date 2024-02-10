@@ -13,14 +13,6 @@ meta:
   manifest:
     directory: manifests
     path:      (( concat meta.manifest.directory "/" meta.bosh.deployment ".yml" ))
-    vars: |
-      ---
-      deployment_name: tinynetes-testflight
-      network_name: default
-    vars-pr: |
-      ---
-      deployment_name: tinynetes-testflight-pr
-      network_name: default
 
   git:
     email:  ((git-commit-email))
