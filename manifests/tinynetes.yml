@@ -78,7 +78,7 @@ variables:
     type: password
     options:
       length: 32
-      include_special: yes
+      # include_special: yes # only valid with credhub, breaks --vars-store
 
 update:
   canaries: 1
