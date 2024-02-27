@@ -67,7 +67,7 @@ EOF
 
 echo "[$(date)] $BIN/$$: issuing the etcd server certificate for etcd"
 gencert etcd \
-        127.0.0.1,<%= spec.ip %> \
+        127.0.0.1,<%= spec.ip %>,<%= spec.address %> \
         etcd
 
 popd >/dev/null 2>&1
