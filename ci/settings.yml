@@ -2,7 +2,7 @@
 meta:
   name:    k8s
   release: Kubernetes Bosh Release
-  target:  gk-plat-devs
+  target:  (( grab meta.team ))
   url:     https://ci.gstack.io
   team:    gk-plat-devs
 
