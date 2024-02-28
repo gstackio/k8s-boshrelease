@@ -142,8 +142,9 @@ properties:
       A Service IP address (in networks.services) to host Core DNS services on.
 
       This cannot be changed after a successful deployment, because Kubernetes does not
-      allow services to change their clusterIP values after initial application of
-      the service spec definition.  Choose wisely.
+      allow services to change their 'ClusterIP' values after initial application of
+      the 'Service' resource definition. Changing this value basically requires to
+      destroy and recreate the Kubernetes cluster from scratch. Choose wisely.
 
   cluster.domain:
     default:     k8s.(deployment).local
@@ -424,6 +425,18 @@ properties:
 
       Make sure you understand the security implications of enabling this
       before you do so.
+
+  dashboard.ip:
+    default: 10.245.0.3
+    description: |
+      A Service IP address (in networks.services) to host the Dashboard
+      services on.
+
+      This cannot be changed after a successful deployment, because Kubernetes
+      does not allow services to change their ClusterIP values after initial
+      application of the Service resource definition. Changing this value
+      basically requires to destroy and recreate the Kubernetes cluster from
+      scratch. Choose wisely.
 
   cert-manager.enabled:
     default: false
