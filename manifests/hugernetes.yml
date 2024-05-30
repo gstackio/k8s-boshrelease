@@ -158,5 +158,7 @@ stemcells:
     version: latest
 
 releases:
-  - name:    k8s
-    version: latest
+- name: k8s
+  sha1: 5d7ce6977d06379bb706e43ae7bca6c336b898f7
+  url: https://github.com/gstackio/k8s-boshrelease/releases/download/v1.19.1/k8s-1.19.1.tgz
+  version: 1.19.1

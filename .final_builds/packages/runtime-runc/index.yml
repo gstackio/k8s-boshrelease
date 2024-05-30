@@ -1,0 +1,6 @@
+builds:
+  1976ecddc46fa9ba0b34fd19018a217b0a86bdf1557e4769771f04ee7b6d844b:
+    version: 1976ecddc46fa9ba0b34fd19018a217b0a86bdf1557e4769771f04ee7b6d844b
+    blobstore_id: 8f8e6407-ca66-48c9-44e5-90b1bb4ff576
+    sha1: sha256:54aebf98035ed7bbabc69d232bbee85e3e3d6f7f1ab118c769c4517780b1709d
+format-version: "2"
