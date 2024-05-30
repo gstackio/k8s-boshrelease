@@ -1,0 +1,5 @@
+
+- path: /instance_groups/name=k8s/azs
+  type: replace
+  value:
+    ((azs))

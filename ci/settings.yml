@@ -13,6 +13,19 @@ meta:
   manifest:
     directory: manifests
     path:      (( concat meta.manifest.directory "/" meta.bosh.deployment ".yml" ))
+    operator_file_paths: |
+      manifests/operators/tinynetes/persistent-disk-type.yml
+      manifests/operators/tinynetes/azs.yml
+      manifests/operators/tinynetes/network-name.yml
+      manifests/operators/tinynetes/k8s-networking.yml
+      manifests/operators/tinynetes/bootstrap.yml
+    vars: |
+      azs:                  [ separate-vbox-zone ]
+      network_name:         vbox-deployments
+      pods_cidr_prefix:     "10.234"
+      services_cidr_prefix: "10.235"
+      persistent_disk_type: 20GB
+
 
   git:
     email:  ((git-commit-email))
@@ -46,7 +59,7 @@ meta:
     deployment: tinynetes
     stemcell:
       cpi: warden-boshlite
-      os: ubuntu-jammy
+      os: ubuntu-xenial
 
   slack:
     webhook:       ((slack-webhook))

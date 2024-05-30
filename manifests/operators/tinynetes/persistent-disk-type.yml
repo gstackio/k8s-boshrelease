@@ -1,0 +1,8 @@
+
+- path: /instance_groups/name=k8s/persistent_disk
+  type: remove
+
+- path: /instance_groups/name=k8s/persistent_disk_type
+  type: replace
+  value:
+    ((persistent_disk_type))
