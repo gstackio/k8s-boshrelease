@@ -6,7 +6,7 @@ meta:
   url:     https://ci.gstack.io
   team:    gk-plat-devs
 
-  test-errands: ~
+  test-errands: smoke-tests
 
   initial_version: "1.19.0"
 
