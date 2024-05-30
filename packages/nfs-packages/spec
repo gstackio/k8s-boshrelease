@@ -1,7 +1,14 @@
 ---
 name: nfs-packages
 dependencies: []
-files: []
+files:
+  - nfs-xenial-debs/keyutils_*_amd64.deb
+  - nfs-xenial-debs/libevent-*_amd64.deb
+  - nfs-xenial-debs/libnfsidmap2_*_amd64.deb
+  - nfs-xenial-debs/nfs-common_*_amd64.deb
+  - nfs-xenial-debs/nfs-kernel-server_*_amd64.deb
+  - nfs-xenial-debs/rpcbind_*_amd64.deb
+
   # - nfs-trusty-debs/libkeyutils1_1.5.6-1_amd64.deb
   # - nfs-trusty-debs/rpcbind_0.2.1-2ubuntu2.2_amd64.deb
   # - nfs-trusty-debs/libevent-2.0-5_2.0.21-stable-1ubuntu1.14.04.2_amd64.deb

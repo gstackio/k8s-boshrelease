@@ -70,6 +70,30 @@ lb/keepalived-2.0.16.tar.gz:
   size: 983376
   object_id: 6b4dab8a-1ba6-4bcf-5ac3-36dc9e3b3d6f
   sha: sha256:f0c7dc86147a286913c1c2c918f557735016285d25779d4d2fce5732fcb888df
+nfs-xenial-debs/keyutils_1.5.9-8ubuntu1_amd64.deb:
+  size: 47054
+  object_id: 9ec73da6-50ca-423f-5a92-79f8b6a60243
+  sha: sha256:782865f7688ecc2a168f6c51e8e63f44326d73144a9df35087fd1e55e30d23db
+nfs-xenial-debs/libevent-2.0-5_2.0.21-stable-2ubuntu0.16.04.1_amd64.deb:
+  size: 114014
+  object_id: 210561eb-3aa5-4d5c-62f6-65a8d90bb698
+  sha: sha256:e1acdffde386a4da7de46166ffd199771a13498f5d4fc38d61b3fa0eba305572
+nfs-xenial-debs/libnfsidmap2_0.25-5_amd64.deb:
+  size: 32182
+  object_id: 3e68de80-c0dd-494f-6769-6dccedb8a2b9
+  sha: sha256:ed00ae6b3efc4c28068e5f984d8c69942c68502593da945b89b0045e7fcef396
+nfs-xenial-debs/nfs-common_1.2.8-9ubuntu12.3_amd64.deb:
+  size: 184900
+  object_id: 2b7534ba-50a6-49db-4a6c-5e392c05a57d
+  sha: sha256:46eb8012fac5b45ab75b27da112dcaee37a48ed8cf1e20bf6ebe673af1f5c3eb
+nfs-xenial-debs/nfs-kernel-server_1.2.8-9ubuntu12.3_amd64.deb:
+  size: 87804
+  object_id: c5c4f49b-e983-4c84-4738-dcf7f1af7101
+  sha: sha256:5e06f2ccb47ccba199528a3f33d8990feae40214a1581efedcac53886637ac42
+nfs-xenial-debs/rpcbind_0.2.3-0.2ubuntu0.16.04.1_amd64.deb:
+  size: 40652
+  object_id: e7660310-c0e3-45e6-58c5-a024509e21ec
+  sha: sha256:f701acd65ffd9c3ffbab4fa2dda6c4f322a91da15e436e584a92da93b68f2b01
 runtime-runc/runc:
   size: 10843120
   object_id: d07c294d-64d4-4a3e-5d3b-0776d3721f09

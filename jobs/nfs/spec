@@ -10,9 +10,9 @@ description: |
 packages:
   - nfs-packages
 
-templates: {}
-  # bin/pre-start: bin/pre-start
-  # bin/post-stop: bin/post-stop
+templates:
+  bin/pre-start: bin/pre-start
+  bin/post-stop: bin/post-stop
 
 properties: {}
 
