@@ -14,12 +14,21 @@ meta:
     directory: manifests
     path:      (( concat meta.manifest.directory "/" meta.bosh.deployment ".yml" ))
     operator_file_paths: |
+      manifests/operators/deployment-name.yml
       manifests/operators/tinynetes/persistent-disk-type.yml
       manifests/operators/tinynetes/azs.yml
       manifests/operators/tinynetes/network-name.yml
       manifests/operators/tinynetes/k8s-networking.yml
       manifests/operators/tinynetes/bootstrap.yml
     vars: |
+      deployment_name:      tinynetes-testflight
+      azs:                  [ separate-vbox-zone ]
+      network_name:         vbox-deployments
+      pods_cidr_prefix:     "10.234"
+      services_cidr_prefix: "10.235"
+      persistent_disk_type: 20GB
+    vars-pr: |
+      deployment_name:      tinynetes-testflight-pr
       azs:                  [ separate-vbox-zone ]
       network_name:         vbox-deployments
       pods_cidr_prefix:     "10.234"
