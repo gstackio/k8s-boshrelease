@@ -112,7 +112,7 @@ jobs:
     serial: true
     plan:
       - in_parallel:
-          - { get: git, trigger: true }
+          - { get: git }
           - { get: version, params: { bump: final } }
           - { get: docker-image-build-task }
           - { get: jammy-latest,  passed: [ bump-deps ], trigger: true, params: { format: oci } }
