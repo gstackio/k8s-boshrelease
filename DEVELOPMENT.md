@@ -26,6 +26,8 @@ Then with more customizations:
     depl="manifests/tinynetes.yml"; ops="manifests/operators/tinynetes";
     bosh deploy "${depl}" \
         --deployment="$(bosh int "${depl}" --path /name)" \
+        --ops-file="${ops}/persistent-disk-type.yml" \
+        --ops-file="${ops}/azs.yml" \
         --ops-file="${ops}/network-name.yml" \
         --ops-file="${ops}/k8s-networking.yml" \
         --ops-file="${ops}/bootstrap.yml" \
