@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eu
+exec 2>&1
+
+export PATH=$PATH:/var/vcap/packages/k8s/bin
+
+if ! grep -qF "image: quay.io/coreos/flannel:v0.15.0" \
+                /var/vcap/jobs/net-flannel/k8s-init/flannel.yml
+then
+    kubectl delete daemonset kube-flannel-ds -n kube-system
+fi

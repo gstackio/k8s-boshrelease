@@ -15,6 +15,7 @@ consumes:
 
 templates:
   bin/pre-start:                      bin/pre-start
+  bin/post-start:                     bin/post-start
 
   k8s-init/flannel.yml:               k8s-init/flannel.yml
 
