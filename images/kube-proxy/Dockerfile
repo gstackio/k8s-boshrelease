@@ -1,4 +1,5 @@
-FROM ubuntu:latest AS build
+ARG ubuntu
+FROM ${ubuntu} AS build
 ARG VERSION
 RUN mkdir -p /build \
  && apt-get update \
@@ -7,7 +8,8 @@ RUN mkdir -p /build \
  && curl -Lo /build/kube-proxy https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kube-proxy \
  && chmod 755 /build/*
 
-FROM alpine:latest
+ARG alpine
+FROM ${alpine}
 MAINTAINER James Hunt <james@niftylogic.com>
 RUN apk add iptables ipset ipvsadm conntrack-tools
 COPY --from=build /build/ /
