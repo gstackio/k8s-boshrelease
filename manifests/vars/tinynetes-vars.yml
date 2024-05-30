@@ -1,0 +1,4 @@
+---
+network_name:         vbox-deployments
+pods_cidr_prefix:     "10.234"
+services_cidr_prefix: "10.235"

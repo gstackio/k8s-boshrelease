@@ -1,0 +1,52 @@
+---
+networks:
+  - name: vbox-infrastructure
+    subnets:
+      - range: 192.168.56.0/24
+        gateway: 192.168.56.1
+        dns:
+          - 8.8.8.8
+        reserved:
+          - &vbox_reserved_head_range
+            192.168.56.1 - 192.168.56.5     # reserved by VirtualBox
+          - &bosh_envs_range
+            192.168.56.6 - 192.168.56.15    # bosh envs
+          - &bespoke_vms_range
+            192.168.56.64 - 192.168.56.127  # manual VMs
+          - &reserved_for_future_use_range
+            192.168.56.128 - 192.168.56.250 # Bosh deployments
+          - &vbox_reserved_tail_range
+            192.168.56.251 - 192.168.56.255 # left to VirtualBox
+
+          - &bosh_depls_range
+            192.168.56.32 - 192.168.56.63   # Bosh deployments
+        static:
+          - &bosh_infra_range
+            192.168.56.16 - 192.168.56.31   # Bosh infra
+        azs:
+          - separate-vbox-zone
+        cloud_properties:
+          name: vboxnet0
+          type: hostonly
+
+  - name: vbox-deployments
+    subnets:
+      - range: 192.168.56.0/24
+        gateway: 192.168.56.1
+        dns:
+          - 8.8.8.8
+        reserved:
+          - *vbox_reserved_head_range
+          - *bosh_envs_range
+          - *bespoke_vms_range
+          - *reserved_for_future_use_range
+          - *vbox_reserved_tail_range
+
+          - *bosh_infra_range
+          # - *bosh_depls_range
+        static: []
+        azs:
+          - separate-vbox-zone
+        cloud_properties:
+          name: vboxnet0
+          type: hostonly

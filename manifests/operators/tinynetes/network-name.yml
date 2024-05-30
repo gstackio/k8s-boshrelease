@@ -1,0 +1,11 @@
+---
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/kubelet/instance-groups/0
+  type: replace
+  value:
+    k8s.((network_name))
+
+- path: /instance_groups/name=k8s/networks/0/name
+  type: replace
+  value:
+    ((network_name))

@@ -1,0 +1,22 @@
+---
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/networks?/pods
+  type: replace
+  value: ((pods_cidr_prefix)).0.0/16
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/networks/services?
+  type: replace
+  value: ((services_cidr_prefix)).0.0/24
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/apiserver/additional-sans
+  type: replace
+  value:
+    - ((services_cidr_prefix)).0.1
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/cluster/dns?
+  type: replace
+  value: ((services_cidr_prefix)).0.2
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/dashboard/ip?
+  type: replace
+  value: ((services_cidr_prefix)).0.3
