@@ -137,6 +137,7 @@ jobs:
                     caches:  [ path: cache ]
                     run:     { path: build }
                 params:
+                  BUILD_ARG_kube_proxy_version: ((.:version))
                   <<: &image_arg
                     IMAGE_ARG_ubuntu: jammy-latest/image.tar
                     IMAGE_ARG_alpine: alpine-latest/image.tar

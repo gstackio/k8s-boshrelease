@@ -1,13 +1,13 @@
 ARG ubuntu
 ARG alpine
+ARG kube_proxy_version
 
 FROM ${ubuntu} AS build
-ENV VERSION=1.19.0
 RUN apt-get update \
  && apt-get install -y curl
-RUN echo "retrieving kube-proxy v${VERSION}..." \
+RUN echo "retrieving kube-proxy v${kube_proxy_version}..." \
  && mkdir -p /build \
- && curl -fSL --url https://dl.k8s.io/v${VERSION}/bin/linux/amd64/kube-proxy \
+ && curl -fSL --url https://dl.k8s.io/v${kube_proxy_version}/bin/linux/amd64/kube-proxy \
          -o /build/kube-proxy \
  && chmod 755 /build/*
 
