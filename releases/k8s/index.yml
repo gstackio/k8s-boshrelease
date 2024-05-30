@@ -1,4 +1,6 @@
 builds:
+  093037ed-d3d2-41eb-48a5-841a505b8e7b:
+    version: 1.19.2
   b48f9c47-103f-4b38-7c71-f50f97f51f1d:
     version: 1.19.1
 format-version: "2"
