@@ -6,5 +6,4 @@ description: |
 
 dependencies: []
 files:
-  - runtime-runc/runc
-  # - runtime-runc/runsc
+  - runtime-runc/runc-v*

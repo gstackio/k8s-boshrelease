@@ -2,7 +2,7 @@ ARG ubuntu
 ARG alpine
 
 FROM ${ubuntu} AS build
-ENV VERSION=1.19.0
+ENV VERSION=1.19.16
 RUN apt-get update \
  && apt-get install -y curl
 RUN echo "retrieving kube-proxy v${VERSION}..." \

@@ -2,6 +2,7 @@
 set -eu
 
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
-cp runtime-runc/runc  ${BOSH_INSTALL_TARGET}/bin
-# cp runtime-runc/runsc ${BOSH_INSTALL_TARGET}/bin
-chmod 755 ${BOSH_INSTALL_TARGET}/bin/*
+for binary in runtime-runc/*; do
+    mv -v "${binary}" "${BOSH_INSTALL_TARGET}/bin/${binary%-v*}"
+done
+chmod +x ${BOSH_INSTALL_TARGET}/bin/*

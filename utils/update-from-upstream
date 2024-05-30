@@ -1,20 +1,21 @@
 #!/bin/bash
 set -eu
 
-VERSION=${VERSION:-1.19.0}
+VERSION=${VERSION:-1.19.16}
 
 # check https://github.com/kubernetes/kubernetes/releases
 mkdir -p tmp
 for x in kube-{apiserver,controller-manager,proxy,scheduler} kubectl kubelet; do
-  echo ">> updating k8s core component '$x'..."
-  [[ ! -f tmp/$x ]] && \
-  curl -Lo tmp/$x  "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/${x}"
-  if ! file tmp/$x | grep -iq 'elf 64-bit lsb executable'; then
-    echo >&2 "failed to download k8s core component '$x':"
-    file tmp/$x
+  echo ">> updating k8s core component '$x' to v${VERSION}..."
+  [[ ! -f tmp/$x-v${VERSION} ]] && \
+    curl -fSL --url "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/${x}" \
+        -o tmp/$x-v${VERSION}
+  if ! file tmp/$x-v${VERSION} | grep -iq 'elf 64-bit lsb executable'; then
+    echo >&2 "failed to download k8s core component '$x' v${VERSION}:"
+    file tmp/$x-v${VERSION}
     exit 1
   else
-    bosh add-blob tmp/$x k8s/$x
+    bosh add-blob tmp/$x-v${VERSION} k8s/$x-v${VERSION}
   fi
 done
 
@@ -22,39 +23,40 @@ done
 # make dockers VERSION=$VERSION
 
 # check https://github.com/containerd/containerd/releases
-v=1.3.7
+v=1.3.10
 echo ">> updating containerd to $v..."
 what=containerd-${v}-linux-amd64.tar.gz
 [[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://github.com/containerd/containerd/releases/download/v${v}/${what}
+curl -fSLo tmp/${what} https://github.com/containerd/containerd/releases/download/v${v}/${what}
 tar -tzf tmp/${what}
 bosh add-blob tmp/${what} containerd/${what}
 
 # check https://github.com/containernetworking/plugins/releases
-v=0.8.6
+# careful: from 1.0.1 onwards flannel is in its own repo https://github.com/flannel-io/cni-plugin/releases
+v=0.9.1
 echo ">> updating cni-plugins to $v..."
 what=cni-plugins-linux-amd64-v${v}.tgz
 [[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://github.com/containernetworking/plugins/releases/download/v${v}/${what}
+curl -fSLo tmp/${what} https://github.com/containernetworking/plugins/releases/download/v${v}/${what}
 tar -tzf tmp/${what}
 bosh add-blob tmp/${what} containerd/${what}
 
 # check https://github.com/kubernetes-sigs/cri-tools/releases
-v=1.18.0
+v=1.22.0
 echo ">> updating crictl to $v..."
 what=crictl-v${v}-linux-amd64.tar.gz
 [[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://github.com/kubernetes-sigs/cri-tools/releases/download/v${v}/${what}
+curl -fSLo tmp/${what} https://github.com/kubernetes-sigs/cri-tools/releases/download/v${v}/${what}
 tar -tzf tmp/${what}
 bosh add-blob tmp/${what} containerd/${what}
 
 # check https://github.com/opencontainers/runc/releases
-v=1.0.0-rc10
+v=1.0.2
 what=runc
 echo ">> updating runc to $v..."
-[[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://github.com/opencontainers/runc/releases/download/v${v}/runc.amd64
-bosh add-blob tmp/${what} runtime-runc/${what}
+[[ ! -f tmp/${what}-v${v} ]] && \
+curl -fSLo tmp/${what}-v${v} https://github.com/opencontainers/runc/releases/download/v${v}/runc.amd64
+bosh add-blob tmp/${what}-v${v} runtime-runc/${what}-v${v}
 
 # v=latest
 # what=runsc
@@ -63,11 +65,11 @@ bosh add-blob tmp/${what} runtime-runc/${what}
 # bosh add-blob tmp/${what} runtime-runc/${what}
 
 # check https://github.com/etcd-io/etcd/releases
-v=3.4.10
+v=3.4.17
 echo ">> updating etcd to $v..."
 what=etcd-v${v}-linux-amd64.tar.gz
 [[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://github.com/etcd-io/etcd/releases/download/v${v}/${what}
+curl -fSLo tmp/${what} https://github.com/etcd-io/etcd/releases/download/v${v}/${what}
 tar -tzf tmp/${what}
 bosh add-blob tmp/${what} etcd/${what}
 
@@ -75,12 +77,12 @@ v=latest
 echo ">> updating cfssl to $v..."
 what=cfssl_linux-amd64
 [[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://pkg.cfssl.org/R1.2/${what}
+curl -fSLo tmp/${what} https://pkg.cfssl.org/R1.2/${what}
 bosh add-blob tmp/${what} cfssl/${what}
 
 v=latest
 echo ">> updating cfssljson to $v..."
 what=cfssljson_linux-amd64
 [[ ! -f tmp/${what} ]] && \
-curl -Lo tmp/${what} https://pkg.cfssl.org/R1.2/${what}
+curl -fSLo tmp/${what} https://pkg.cfssl.org/R1.2/${what}
 bosh add-blob tmp/${what} cfssl/${what}

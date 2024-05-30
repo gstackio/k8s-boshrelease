@@ -2,5 +2,7 @@
 set -eu
 
 mkdir -p  ${BOSH_INSTALL_TARGET}/bin
-mv k8s/*  ${BOSH_INSTALL_TARGET}/bin
-chmod 755 ${BOSH_INSTALL_TARGET}/bin/*
+for binary in k8s/*; do
+    mv -v "${binary}" "${BOSH_INSTALL_TARGET}/bin/${binary%-v*}"
+done
+chmod +x ${BOSH_INSTALL_TARGET}/bin/*
