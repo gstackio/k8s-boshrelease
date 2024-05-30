@@ -4,11 +4,10 @@ instance_groups:
   - name:      k8s
     instances: 1
     azs:       [z1]
-    # vm_resources:
-    #   cpu: 2
-    #   ram: 2048
-    #   ephemeral_disk_size: 20_000
-    vm_type: default
+    vm_resources:
+      cpu: 2
+      ram: 2048
+      ephemeral_disk_size: 20_000
     vm_extensions:
       - kubelet
     persistent_disk: 20_000
