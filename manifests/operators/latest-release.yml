@@ -1,0 +1,6 @@
+
+- path: /releases/name=k8s
+  type: replace
+  value:
+    name: k8s
+    version: latest

@@ -31,6 +31,7 @@ Then with more customizations:
         --ops-file="${ops}/network-name.yml" \
         --ops-file="${ops}/k8s-networking.yml" \
         --ops-file="${ops}/bootstrap.yml" \
+        --ops-file="manifests/operators/latest-release.yml" \
         --vars-file="manifests/vars/tinynetes-vars.yml" \
         --vars-store="tmp/depl-creds.yml" \
         --non-interactive
