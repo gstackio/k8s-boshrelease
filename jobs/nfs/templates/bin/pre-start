@@ -18,13 +18,13 @@ case "$os" in
 ubuntu)
   codename=$(lsb_release -sc)
   case "$codename" in
-  xenial)
+  bionic)
     echo "[$(date)] $$: installing NFS packages"
     (
       flock -x 200
       nfs_deb $codename rpcbind           "rpcbind_*_amd64.deb"
       nfs_deb $codename keyutils          "keyutils_*_amd64.deb"
-      nfs_deb $codename libevent-2.0-5    "libevent-*_amd64.deb"
+      nfs_deb $codename libevent-2.1-6    "libevent-*_amd64.deb"
       nfs_deb $codename libnfsidmap2      "libnfsidmap2_*_amd64.deb"
       nfs_deb $codename nfs-common        "nfs-common_*_amd64.deb"
       nfs_deb $codename nfs-kernel-server "nfs-kernel-server_*_amd64.deb"

@@ -7,7 +7,11 @@ os=$(cat /var/vcap/bosh/etc/operating_system)
 case "$os" in
 ubuntu)
   echo "[$(date)] $$: shutting down NFS..."
-  /etc/init.d/nfs-kernel-server stop
+  if [[ ! -x /etc/init.d/nfs-kernel-server ]]; then
+    echo "WARNING: cannot stop NFS server: missing init script. Skipping."
+  else
+    /etc/init.d/nfs-kernel-server stop
+  fi
   exit 0
   ;;
 
