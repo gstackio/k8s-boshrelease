@@ -16,6 +16,7 @@
       script: |
         #!/usr/bin/env bash
         set -ex
+        exec 2>&1
 
         # install Bash completion for 'kubectl' and the 'k' alias
         if ! grep -qF kubectl ~/.bashrc; then
@@ -29,6 +30,7 @@
         fi
 
         # Vim version is old and needs upgrading for our config to properly apply
+        # Git is required for krew to work
         idx=0
         while fuser /var/lib/dpkg/lock{,-frontend} >/dev/null 2>&1 ; do
             echo "Waiting for other software install to finish (${idx}s elapsed)..."
@@ -37,7 +39,7 @@
         done
         export DEBIAN_FRONTEND="noninteractive"
         apt-get update -qq
-        apt-get install -y -qq "vim"
+        apt-get install -y -qq "vim" "git"
 
         # Enforce curated Vim config for editing YAML files appropriately
         cat > ~/.vimrc <<'EOF'
@@ -49,4 +51,39 @@
         set softtabstop=2
         set nowrap
         set laststatus=2
+        EOF
+
+        # install krew
+        export PATH=$PATH:/var/vcap/packages/k8s/bin # make sure we have kubectl
+        cd ~ # kludge: 'cd' alone fails because HOME is not set during 'pre-start' execution
+        OS="$(uname | tr '[:upper:]' '[:lower:]')"
+        ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+        KREW="krew-${OS}_${ARCH}"
+        if [[ ! -f "${KREW}.tar.gz" ]]; then
+            curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz"
+        fi
+        if [[ ! -x "${KREW}" ]]; then
+            tar zxvf "${KREW}.tar.gz"
+        fi
+        ./"${KREW}" install krew
+        echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.bashrc
+
+        # The 'view-allocations' plugin requires a .kube/config
+        mkdir -p ~/.kube
+        cat > ~/.kube/config <<'EOF'
+        kind: Config
+        apiVersion: v1
+        users:
+          - name: admin
+            user: {}
+        clusters:
+          - name: local
+            cluster:
+              server: http://127.0.0.1:8080
+        contexts:
+          - name: default
+            context:
+              user: admin
+              cluster: local
+        current-context: default
         EOF
