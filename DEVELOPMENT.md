@@ -30,6 +30,7 @@ Then with more customizations:
         --ops-file="${tops}/azs.yml" \
         --ops-file="${tops}/network-name.yml" \
         --ops-file="${tops}/k8s-networking.yml" \
+        --ops-file="${tops}/cert-manager.yml" \
         --ops-file="${tops}/bootstrap.yml" \
         --ops-file="${ops}/latest-release.yml" \
         --vars-file="manifests/vars/tinynetes-vars.yml" \

@@ -1,0 +1,17 @@
+
+- path: /instance_groups/name=k8s/jobs/name=control/properties/cert-manager?
+  type: replace
+  value:
+    enabled: yes
+    ca:
+      certificate: ((tls-cm.certificate))
+      key:         ((tls-cm.private_key))
+
+- path: /variables/name=tls-cm?
+  type: replace
+  value:
+    name: tls-cm
+    type: certificate
+    options:
+      is_ca: yes
+      common_name: internal
