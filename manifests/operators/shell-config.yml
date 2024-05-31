@@ -1,0 +1,52 @@
+
+- path: /releases/name=os-conf?
+  type: replace
+  value:
+    name: os-conf
+    version: ((os_conf_version))
+    url: https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=((os_conf_version))
+    sha1: ((os_conf_sha1))
+
+- path: /instance_groups/name=k8s/jobs/name=pre-start-script?
+  type: replace
+  value:
+    name: pre-start-script
+    release: os-conf
+    properties:
+      script: |
+        #!/usr/bin/env bash
+        set -ex
+
+        # install Bash completion for 'kubectl' and the 'k' alias
+        if ! grep -qF kubectl ~/.bashrc; then
+            echo >> ~/.bashrc
+            cat >> ~/.bashrc <<'EOF'
+        export PATH=$PATH:/var/vcap/packages/k8s/bin
+        source <(kubectl completion bash)
+        alias k=kubectl
+        complete -o default -F __start_kubectl k
+        EOF
+        fi
+
+        # Vim version is old and needs upgrading for our config to properly apply
+        idx=0
+        while fuser /var/lib/dpkg/lock{,-frontend} >/dev/null 2>&1 ; do
+            echo "Waiting for other software install to finish (${idx}s elapsed)..."
+            sleep 2
+            idx=$(expr ${idx} + 2 )
+        done
+        export DEBIAN_FRONTEND="noninteractive"
+        apt-get update -qq
+        apt-get install -y -qq "vim"
+
+        # Enforce curated Vim config for editing YAML files appropriately
+        cat > ~/.vimrc <<'EOF'
+        syntax on
+        set autoindent
+        set expandtab
+        set number
+        set shiftwidth=2
+        set softtabstop=2
+        set nowrap
+        set laststatus=2
+        EOF

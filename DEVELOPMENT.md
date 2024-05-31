@@ -23,16 +23,19 @@ Then with more customizations:
 
 ```shell
 (
-    depl="manifests/tinynetes.yml"; ops="manifests/operators/tinynetes";
+    depl="manifests/tinynetes.yml"; ops="manifests/operators"; tops="${ops}/tinynetes";
     bosh deploy "${depl}" \
         --deployment="$(bosh int "${depl}" --path /name)" \
-        --ops-file="${ops}/persistent-disk-type.yml" \
-        --ops-file="${ops}/azs.yml" \
-        --ops-file="${ops}/network-name.yml" \
-        --ops-file="${ops}/k8s-networking.yml" \
-        --ops-file="${ops}/bootstrap.yml" \
-        --ops-file="manifests/operators/latest-release.yml" \
+        --ops-file="${tops}/persistent-disk-type.yml" \
+        --ops-file="${tops}/azs.yml" \
+        --ops-file="${tops}/network-name.yml" \
+        --ops-file="${tops}/k8s-networking.yml" \
+        --ops-file="${tops}/bootstrap.yml" \
+        --ops-file="${ops}/latest-release.yml" \
         --vars-file="manifests/vars/tinynetes-vars.yml" \
+        --ops-file="${ops}/shell-config.yml" \
+        --var="os_conf_version=22.2.1" \
+        --var="os_conf_sha1=daf34e35f1ac678ba05db3496c4226064b99b3e4" \
         --vars-store="tmp/depl-creds.yml" \
         --non-interactive
 )
