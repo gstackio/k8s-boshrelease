@@ -55,11 +55,14 @@ bosh add-blob tmp/${what} containerd/${what}
 
 # check https://github.com/opencontainers/runc/releases
 v=1.0.2
-what=runc
+what=runc-v${v}
 echo ">> updating runc to $v..."
-[[ ! -f tmp/${what}-v${v} ]] && \
-curl -fSLo tmp/${what}-v${v} https://github.com/opencontainers/runc/releases/download/v${v}/runc.amd64
-bosh add-blob tmp/${what}-v${v} runtime-runc/${what}-v${v}
+if [[ ! -f tmp/${what}.gz ]]; then
+  [[ ! -f tmp/${what} ]] && \
+    curl -fSLo tmp/${what} https://github.com/opencontainers/runc/releases/download/v${v}/runc.amd64
+  gzip -9 tmp/${what}
+fi
+bosh add-blob tmp/${what}.gz runtime-runc/${what}.gz
 
 # v=latest
 # what=runsc

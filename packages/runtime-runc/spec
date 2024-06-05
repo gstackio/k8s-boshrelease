@@ -6,4 +6,4 @@ description: |
 
 dependencies: []
 files:
-  - runtime-runc/runc-v*
+  - runtime-runc/runc-v*.gz

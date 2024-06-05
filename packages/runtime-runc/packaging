@@ -3,8 +3,9 @@ set -eu
 
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
 pushd runtime-runc
-for binary in *; do
-    mv -v "${binary}" "${BOSH_INSTALL_TARGET}/bin/${binary%-v*}"
+for binary in *.gz; do
+    mv -v "${binary}" "${BOSH_INSTALL_TARGET}/bin/${binary%-v*}.gz"
 done
 popd
+gunzip ${BOSH_INSTALL_TARGET}/bin/*.gz
 chmod +x ${BOSH_INSTALL_TARGET}/bin/*
