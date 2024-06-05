@@ -7,16 +7,19 @@ VERSION=${VERSION:-1.19.16}
 mkdir -p tmp
 for x in kube-{apiserver,controller-manager,proxy,scheduler} kubectl kubelet; do
   echo ">> updating k8s core component '$x' to v${VERSION}..."
-  [[ ! -f tmp/$x-v${VERSION} ]] && \
-    curl -fSL --url "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/${x}" \
-        -o tmp/$x-v${VERSION}
-  if ! file tmp/$x-v${VERSION} | grep -iq 'elf 64-bit lsb executable'; then
-    echo >&2 "failed to download k8s core component '$x' v${VERSION}:"
-    file tmp/$x-v${VERSION}
-    exit 1
-  else
-    bosh add-blob tmp/$x-v${VERSION} k8s/$x-v${VERSION}
+  if [[ ! -f tmp/$x-v${VERSION}.gz ]]; then
+    if [[ ! -f tmp/$x-v${VERSION} ]]; then
+      curl -fSL --url "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/${x}" \
+          -o tmp/$x-v${VERSION}
+      if ! file tmp/$x-v${VERSION} | grep -iq 'elf 64-bit lsb executable'; then
+        echo >&2 "failed to download k8s core component '$x' v${VERSION}:"
+        file tmp/$x-v${VERSION}
+        exit 1
+      fi
+    fi
+    gzip -9 tmp/$x-v${VERSION}
   fi
+  bosh add-blob tmp/$x-v${VERSION}.gz k8s/$x-v${VERSION}.gz
 done
 
 # echo ">> rebuilding dockerized k8s components..."

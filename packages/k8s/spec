@@ -5,11 +5,11 @@ description: |
 
 dependencies: []
 files:
-  - k8s/kubectl-v*
+  - k8s/kubectl-v*.gz
 
-  - k8s/kube-apiserver-v*
-  - k8s/kube-controller-manager-v*
-  - k8s/kube-scheduler-v*
+  - k8s/kube-apiserver-v*.gz
+  - k8s/kube-controller-manager-v*.gz
+  - k8s/kube-scheduler-v*.gz
 
-  - k8s/kubelet-v*
-  - k8s/kube-proxy-v*
+  - k8s/kubelet-v*.gz
+  - k8s/kube-proxy-v*.gz
