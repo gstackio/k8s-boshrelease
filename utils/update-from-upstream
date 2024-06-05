@@ -35,8 +35,7 @@ tar -tzf tmp/${what}
 bosh add-blob tmp/${what} containerd/${what}
 
 # check https://github.com/containernetworking/plugins/releases
-# careful: from 1.0.1 onwards flannel is in its own repo https://github.com/flannel-io/cni-plugin/releases
-v=0.9.1
+v=1.0.1
 echo ">> updating cni-plugins to $v..."
 what=cni-plugins-linux-amd64-v${v}.tgz
 [[ ! -f tmp/${what} ]] && \
@@ -44,8 +43,19 @@ curl -fSLo tmp/${what} https://github.com/containernetworking/plugins/releases/d
 tar -tzf tmp/${what}
 bosh add-blob tmp/${what} containerd/${what}
 
+# check https://github.com/flannel-io/cni-plugin/releases
+v=1.0.1
+echo ">> updating flannel cni plugin to $v..."
+what=flannel-linux-amd64-v${v}
+if [[ ! -f tmp/${what}.gz ]]; then
+  [[ ! -f tmp/${what} ]] && \
+    curl -fSLo tmp/${what} https://github.com/flannel-io/cni-plugin/releases/download/v1.0.1/flannel-amd64
+  gzip -9 tmp/${what}
+fi
+bosh add-blob tmp/${what}.gz containerd/${what}.gz
+
 # check https://github.com/kubernetes-sigs/cri-tools/releases
-v=1.22.0
+v=1.23.0
 echo ">> updating crictl to $v..."
 what=crictl-v${v}-linux-amd64.tar.gz
 [[ ! -f tmp/${what} ]] && \
