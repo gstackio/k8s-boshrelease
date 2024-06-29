@@ -72,7 +72,6 @@ case $1 in
            --kubelet-certificate-authority=$JOB_DIR/tls/ca/cert.pem \
            --kubelet-client-certificate=$CERTS_DIR/kubelet-client/cert.pem \
            --kubelet-client-key=$CERTS_DIR/kubelet-client/key.pem \
-           --kubelet-https=true \
            --runtime-config=api/all=true \
            --service-account-key-file=$JOB_DIR/tls/sa/cert.pem \
            --service-account-signing-key-file=$JOB_DIR/tls/sa/key.pem \

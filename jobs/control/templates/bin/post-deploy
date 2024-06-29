@@ -14,7 +14,7 @@ export PATH=$PATH:/var/vcap/packages/k8s/bin
 echo "[$(date)] $BIN/$$: post-deploy starting up..."
 
 clusterok() {
-  status=$(curl -sf http://localhost:8080/healthz)
+  status=$(curl -sfk https://localhost:6443/healthz)
   test "s'${status}" = "s'ok"
 }
 
@@ -28,8 +28,8 @@ while ! clusterok; do
   if [[ "${time}" -gt "${time_out}" ]]; then
     echo
     echo "[$(date)] $BIN/$$: cluster did not coalesce within <%= p('coalesce') %> seconds"
-    echo "[$(date)] $BIN/$$: \`curl -v http://localhost:8080/healthz\` said:"
-    curl -v http://localhost:8080/healthz
+    echo "[$(date)] $BIN/$$: \`curl -vk https://localhost:6443/healthz\` said:"
+    curl -vk https://localhost:6443/healthz
     echo "[$(date)] $BIN/$$: TERMINATING"
     exit 1
   fi
