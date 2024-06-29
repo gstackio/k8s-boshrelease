@@ -49,7 +49,7 @@ echo ">> updating flannel cni plugin to $v..."
 what=flannel-linux-amd64-v${v}
 if [[ ! -f tmp/${what}.gz ]]; then
   [[ ! -f tmp/${what} ]] && \
-    curl -fSLo tmp/${what} https://github.com/flannel-io/cni-plugin/releases/download/v1.0.1/flannel-amd64
+    curl -fSLo tmp/${what} https://github.com/flannel-io/cni-plugin/releases/download/v${v}/flannel-amd64
   gzip -9 tmp/${what}
 fi
 bosh add-blob tmp/${what}.gz containerd/${what}.gz

@@ -87,3 +87,5 @@
               cluster: local
         current-context: default
         EOF
+
+        # useful plugins: view-allocations, neat.

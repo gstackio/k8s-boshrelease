@@ -3,4 +3,5 @@
   type: replace
   value:
     name: k8s
+    # version: 1.19.2+dev.8 # latest k8s release shipping v1.19.16
     version: latest

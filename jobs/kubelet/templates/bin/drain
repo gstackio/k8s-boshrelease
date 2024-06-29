@@ -16,6 +16,7 @@ exec >>$LOG_DIR/$BIN.log 2>&1
 export PATH=$PATH:/var/vcap/packages/k8s/bin
 export KUBECONFIG=$DAT_DIR/automaton.kubeconfig
 
+# Problem: when API server has crashed, this drain script fails
 if pgrep -x kubelet; then
   echo "[$(date)] $BIN/$$: [$NODENAME] currently running the following pods:"
   kubectl get pod -A

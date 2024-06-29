@@ -157,7 +157,7 @@ properties:
 
       In theory, "ipvs" mode will provide more scalability, with higher throughput
       and pod/service density.  However, if you want to run Eirini, or anything else
-      which needs to be able to connect to a NodePort from tje kubelet, via the
+      which needs to be able to connect to a NodePort from the kubelet, via the
       127.0.0.1 loopback address, you will need to set this to "iptables".
 
       If you change this, you will need to delete all kube-proxy pods to get them to

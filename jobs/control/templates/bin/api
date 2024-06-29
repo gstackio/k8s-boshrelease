@@ -75,6 +75,8 @@ case $1 in
            --kubelet-https=true \
            --runtime-config=api/all=true \
            --service-account-key-file=$JOB_DIR/tls/sa/cert.pem \
+           --service-account-signing-key-file=$JOB_DIR/tls/sa/key.pem \
+           --service-account-issuer=https://kubernetes.default.svc.k8s.<%= p('cluster.domain').gsub('(deployment)', spec.deployment) %>.local \
            --service-cluster-ip-range=<%= p('networks.services') %> \
            --service-node-port-range=30000-32767 \
            --tls-cert-file=$CERTS_DIR/api/cert.pem \
