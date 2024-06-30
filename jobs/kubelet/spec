@@ -11,7 +11,7 @@ description: |
 
   Because of naming limitations in Kubernetes (the 63-character label limit),
   kubelet nodes are registered as "$id.k8s", where _$id_ is the UUID of the
-  deployment VM.  This leads to 40-character names (36 or the UUID and 4 for
+  deployment VM.  This leads to 40-character names (36 for the UUID and 4 for
   the ".k8s" suffix), which are acceptable to API server.
 
   This in turn means that we **must** use BOSH-DNS when deploying k8s.

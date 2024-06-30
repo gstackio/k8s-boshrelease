@@ -17,7 +17,9 @@ export PATH=$PATH:/var/vcap/packages/k8s/bin
 export KUBECONFIG=$DAT_DIR/automaton.kubeconfig
 
 # Problem: when API server has crashed, this drain script fails
-if pgrep -x kubelet; then
+if ! pgrep -x kubelet; then
+  echo "[$(date)] $BIN/$$: [$NODENAME] kubelet not running; skipping drain..."
+else
   echo "[$(date)] $BIN/$$: [$NODENAME] currently running the following pods:"
   kubectl get pod -A
   echo "[$(date)] $BIN/$$: [$NODENAME] draining this kubernetes node"
@@ -25,8 +27,44 @@ if pgrep -x kubelet; then
   echo "[$(date)] $BIN/$$: [$NODENAME] drain complete; the following pods remain (this may fail, and that's ok):"
   kubectl get pod -A || true
   echo "[$(date)] $BIN/$$: [$NODENAME] drain script exiting 0."
-else
-  echo "[$(date)] $BIN/$$: [$NODENAME] kubelet not running; skipping drain..."
+
+  # Stop Kubelet. Monit wouldn't complain as it is not monitoring it anymore
+  # here in the 'drain' script.
+  "${JOB_DIR}/bin/kubelet" stop
+
+  # List all containers using 'ctr' (before ContainerD is shut down), in order
+  # to terminate or kill them, so that DaemonSets are properly evicted, as
+  # expected by the Bosh semantics for stopped innstances.
+  export PATH="/var/vcap/packages/containerd/bin:${PATH}"
+
+  echo "INFO: sending a TERM(15) signal to all processes of all running" \
+      "containers..."
+  ctr --namespace=k8s.io tasks list \
+      | tail +2 | awk '{print $1}' \
+      | xargs -n1 ctr --namespace=k8s.io tasks kill --all
+
+  # Wait 10 seconds or containers to exit
+  timeout=10  elapsed=0  remaining_live_containeres=0
+  while [[ ${elapsed} -lt ${timeout} ]]; do
+      remaining_live_containeres=$(
+          ctr --namespace=k8s.io tasks list \
+              | tail +2 \
+              | wc -l
+      )
+      if [[ ${remaining_live_containeres} -eq 0 ]]; then
+          break
+      fi
+      sleep 1
+      elapsed=$(( ${elapsed} + 1 ))
+  done
+  if [[ ${elapsed} -ge ${timeout} ]]; then
+      echo "WARN: ${remaining_live_containeres} remaining live containers." \
+          "Sending a KILL(9) signal to all processes of all running" \
+          "containers..."
+      ctr --namespace=k8s.io tasks list \
+          | tail +2 | awk '{print $1}' \
+          | xargs -n1 ctr --namespace=k8s.io tasks kill --all --signal 9
+  fi
 fi
 
 # BOSH expects a literal '0' printed on stdout, to indicate

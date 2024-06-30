@@ -59,9 +59,6 @@ case $1 in
 
 
   stop)
-
-    # FIXME: wait for kubelet to be shut down
-
     echo "[$(date)] $BIN/$$: shutting down..."
     if [[ -f $PIDFILE ]]; then
       PID=$(head -1 $PIDFILE)
