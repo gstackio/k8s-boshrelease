@@ -180,7 +180,30 @@ jobs:
       - {} # in_parallel:
       - task: testflight
         config:
-          caches: [ path: git/blobs ]
+          caches:
+            - path: git/blobs
+            - path: /root/.bosh/cache
+
+  - name: testflight-pr
+    plan:
+      - (( inline ))
+      - {} # in_parallel:
+      - {} # put: git-pull-requests
+      - task: testflight
+        config:
+          caches:
+            - path: git-pull-requests/blobs
+            - path: /root/.bosh/cache
+
+  - name: shipit
+    plan:
+      - (( inline ))
+      - {} # in_parallel:
+      - task: release
+        config:
+          caches:
+            - path: git/blobs
+            - path: /root/.bosh/cache
 
 resources:
 
