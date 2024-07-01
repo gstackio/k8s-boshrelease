@@ -1,0 +1,140 @@
+name: k8s
+version: 1.20.0
+commit_hash: c1f23ed
+uncommitted_changes: false
+jobs:
+- name: control
+  version: d145b4f197e17ddf18adde32960c30bc5769a8a1b727a160e65dabaa3710154d
+  fingerprint: d145b4f197e17ddf18adde32960c30bc5769a8a1b727a160e65dabaa3710154d
+  sha1: sha256:10fbd64d2b5aee89f6e3cb5c3189f26652a4b0b70d1223c399505c92d99a3e5c
+  packages:
+  - k8s
+  - cfssl
+- name: etcd
+  version: 6c3676cef8029f1ddfe32bf3b386d75163f37d3af28cd8380d60944167fd8592
+  fingerprint: 6c3676cef8029f1ddfe32bf3b386d75163f37d3af28cd8380d60944167fd8592
+  sha1: sha256:c2b7d2abd93d7e9d93d4650acb1117aaac53617cac0b8f47fd9d5288321d12ca
+  packages:
+  - etcd
+  - cfssl
+- name: jumpbox
+  version: 0f8979c3d49d358a4af8495216612e0671c1acb696ae1ea218487921e753ecca
+  fingerprint: 0f8979c3d49d358a4af8495216612e0671c1acb696ae1ea218487921e753ecca
+  sha1: sha256:a5e29b83812077bb1197a9266003aa1ddbd0bdb6abd3b4b377a6339f7d29821f
+  packages:
+  - k8s
+  - cfssl
+  - jq
+- name: kubelet
+  version: e9cb84f49682cf1a1a86f77360689452fc6fa99d7eb916480966a3a2d6d765fe
+  fingerprint: e9cb84f49682cf1a1a86f77360689452fc6fa99d7eb916480966a3a2d6d765fe
+  sha1: sha256:4a1004d597fcb052965c80d9121d14982343b02db14a8f2413acb4b975178987
+  packages:
+  - k8s
+  - cfssl
+  - ipvsadm
+- name: lb
+  version: 2d101efe52792a7340377018ffff798c72c498af87db3bb9b9394b7245414335
+  fingerprint: 2d101efe52792a7340377018ffff798c72c498af87db3bb9b9394b7245414335
+  sha1: sha256:6e09de72b7a5a671dbf2fca2aeefd71d9d9b0d2391c841966b362dc569983060
+  packages:
+  - haproxy
+  - keepalived
+- name: net-flannel
+  version: ba8cb9ba33348a7ac9644fd581f6641bc912ed5604607a2bd92d2dfc10c44df1
+  fingerprint: ba8cb9ba33348a7ac9644fd581f6641bc912ed5604607a2bd92d2dfc10c44df1
+  sha1: sha256:2201760340b836feccd5b81a855415901be7f64bd1df5bc3a7956695d6681b9e
+  packages: []
+- name: net-weave
+  version: 486c3d5e51fd9346ca3e3cafdae896b088ed591975c304e4a50647ba2bb7c145
+  fingerprint: 486c3d5e51fd9346ca3e3cafdae896b088ed591975c304e4a50647ba2bb7c145
+  sha1: sha256:25c024ad07a88be1f40deea0d8804c09858f4c5b277b3f09302632666f8b6dc1
+  packages: []
+- name: nfs
+  version: b182aab8eb67cc7409e1b5fe87c52f44c8926118ed1ffeeec3fa62a31d70d852
+  fingerprint: b182aab8eb67cc7409e1b5fe87c52f44c8926118ed1ffeeec3fa62a31d70d852
+  sha1: sha256:8d2dfa694f0547c555fabe99a1f74eea2075c4e5b4238db949cf9865414d2e26
+  packages:
+  - nfs-packages
+- name: runtime-runc
+  version: 6c5aeef85943b328e55bf61ae68d8689630ea05689df3d44f944291cf07a0e18
+  fingerprint: 6c5aeef85943b328e55bf61ae68d8689630ea05689df3d44f944291cf07a0e18
+  sha1: sha256:6e2e527cc4bbfed40e1861c68c524f668d684145c1c02aad2841b5b57d97575a
+  packages:
+  - containerd
+  - runtime-runc
+  - socat
+  - ttar
+- name: smoke-tests
+  version: 10361a3a92335c4585fdce017026f22169c6d4843c6afb2950659f660deecd2b
+  fingerprint: 10361a3a92335c4585fdce017026f22169c6d4843c6afb2950659f660deecd2b
+  sha1: sha256:b3a9d2fdcfb8351b3f44f0f3dcc4419432fbce6487682dc77513aaf58600b8c2
+  packages:
+  - k8s
+  - cfssl
+  - jq
+packages:
+- name: cfssl
+  version: 634341a3dad0d6c8d2ed726c70b65ab32429651e4cce7ed39e9b2836ed34681d
+  fingerprint: 634341a3dad0d6c8d2ed726c70b65ab32429651e4cce7ed39e9b2836ed34681d
+  sha1: sha256:0cca38521276e2be81d47eb06b8f98b62a1231168b75a4336ff38234a90e98be
+  dependencies: []
+- name: containerd
+  version: ec902f2879033be1f44241369b620c37fa1bc0492252db7d6d2e0646511a98cf
+  fingerprint: ec902f2879033be1f44241369b620c37fa1bc0492252db7d6d2e0646511a98cf
+  sha1: sha256:14b0952f2b9e6a83d1550c0baa8e0643c6e0e1a2d6dd432888b50483156f24e4
+  dependencies: []
+- name: etcd
+  version: af506f348905bd53c185a30fd82db0c38e70511fd318b6dfabe953d4143537c9
+  fingerprint: af506f348905bd53c185a30fd82db0c38e70511fd318b6dfabe953d4143537c9
+  sha1: sha256:31a08dba7e52330c5d9513cb7f065b66c3bdddc633fa7108c05662ba8b388e05
+  dependencies: []
+- name: haproxy
+  version: 7a9ecd013f121fc0bcf0b75d75b8a4faa8129e49d0964f2dc2eadca520a02fe2
+  fingerprint: 7a9ecd013f121fc0bcf0b75d75b8a4faa8129e49d0964f2dc2eadca520a02fe2
+  sha1: sha256:592f9c6f51d7c2ac0edaea41ac320f24e7684830cabb22be1a87770c92b8f07f
+  dependencies: []
+- name: ipvsadm
+  version: 0b885a0c6a2c7aed407883934b8f1d79ee94c8a11c85a84d45cb0ea2fa7805ed
+  fingerprint: 0b885a0c6a2c7aed407883934b8f1d79ee94c8a11c85a84d45cb0ea2fa7805ed
+  sha1: sha256:7078d08af9b498c5e7d1bb80b756a5e827b70949c9ef159b25b1a5343ed0fb7d
+  dependencies: []
+- name: jq
+  version: 621431ae33584b634e7c870dd2a4ac176ad7cc03a639cffa7a3b29bc6946b8d9
+  fingerprint: 621431ae33584b634e7c870dd2a4ac176ad7cc03a639cffa7a3b29bc6946b8d9
+  sha1: sha256:6179279510d295f562f630d99dd30995cb12784c80407042c9ac908bbd7fb634
+  dependencies: []
+- name: k8s
+  version: 60f3e1c8f5277099d82145d520fe7dcf1e543fa31b88cb6fd71e769b6a4aa72c
+  fingerprint: 60f3e1c8f5277099d82145d520fe7dcf1e543fa31b88cb6fd71e769b6a4aa72c
+  sha1: sha256:be9f1710f4d24eae59bc57fc02ef5e938d9095c17c842eedb4ba6b2d2098706d
+  dependencies: []
+- name: keepalived
+  version: 093f8cac9024d989e1e09ab4ec713eb03c285f1dbe6e76282cd9bad0092dfb8b
+  fingerprint: 093f8cac9024d989e1e09ab4ec713eb03c285f1dbe6e76282cd9bad0092dfb8b
+  sha1: sha256:a4feb0aec266c87af098c7f4eed04fab6791f0d1ef1bff81fc92b2def4189a97
+  dependencies: []
+- name: nfs-packages
+  version: 145ba5be2aea8eee2195adb9a89c89b729db88c5a777fb87b7e1448252c80aef
+  fingerprint: 145ba5be2aea8eee2195adb9a89c89b729db88c5a777fb87b7e1448252c80aef
+  sha1: sha256:cd0caaabc4e5575e6f5ce34103be9b4e3fac9c7e7e72e95caf09d946245a341e
+  dependencies: []
+- name: runtime-runc
+  version: 349f2b988c6d1a51f3ec1c1b52a91ec8a296999392e92151f1e7bd4ee3c7beab
+  fingerprint: 349f2b988c6d1a51f3ec1c1b52a91ec8a296999392e92151f1e7bd4ee3c7beab
+  sha1: sha256:2ba270dd1535436874654b7d8e61468860308e2cddf3e0834ae0ec02724e4cdb
+  dependencies: []
+- name: socat
+  version: 1634be7d407eacf9d443c77f480a370492b77d6e5fa3c37c4b2729e817abd48f
+  fingerprint: 1634be7d407eacf9d443c77f480a370492b77d6e5fa3c37c4b2729e817abd48f
+  sha1: sha256:313e180a78d64c92847fe3303d0d0740e31261f4f20d6bcd50afcfea5a0656cc
+  dependencies: []
+- name: ttar
+  version: 7c69a29f5b2c9ffdd5b8514e858dfdc3ead69304188b1eafa292d99001d0c695
+  fingerprint: 7c69a29f5b2c9ffdd5b8514e858dfdc3ead69304188b1eafa292d99001d0c695
+  sha1: sha256:87124f9fcefc60a557bf22ec387518cae353cb027b08ab7068e8f58e653a3a40
+  dependencies: []
+license:
+  version: 658f2afd245accd7cebf411a44d50e3351385e73883e3752092cda0b7af3e207
+  fingerprint: 658f2afd245accd7cebf411a44d50e3351385e73883e3752092cda0b7af3e207
+  sha1: sha256:a3b2153126b5f29dd64ef8b816876500edae63f4c4693b466586068a3841b041
