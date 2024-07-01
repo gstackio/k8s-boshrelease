@@ -67,7 +67,7 @@ meta:
     deployment-pr: (( concat meta.bosh.deploy-flavor "-testflight-pr" ))
     stemcell:
       cpi: warden-boshlite
-      os: ubuntu-xenial
+      os: ubuntu-bionic
 
   slack:
     webhook:       ((slack-webhook))
