@@ -139,6 +139,9 @@ stemcells:
 
 releases:
 - name: k8s
-  sha1: b73534914082f86ee44e3eecd760abb9035335fc
-  url: https://github.com/gstackio/k8s-boshrelease/releases/download/v1.20.0/k8s-1.20.0.tgz
+  sha1: a6a318dabcdcb9e7a814449b473c7c6411aef640
+  stemcell:
+    os: ubuntu-bionic
+    version: "1.204"
+  url: https://s3.eu-west-3.amazonaws.com/gk-k8s-boshrelease/compiled-releases/k8s/k8s-1.20.0-ubuntu-bionic-1.204-20241112-234513-658695209-20241112234532.tgz
   version: 1.20.0
